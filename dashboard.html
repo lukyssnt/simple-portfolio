@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="adminPanel" class="active">
+        <div class="admin-content">
+            <div class="admin-header">
+                <h2>Dashboard Admin</h2>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Tabs admin (Home, Portfolio, Blog, dst) -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="home-tab">Edit Home</button>
+                <button class="admin-tab" data-tab="portfolio-tab">Kelola Portofolio</button>
+                <button class="admin-tab" data-tab="blog-tab">Kelola Blog</button>
+            </div>
+
+            <!-- Konten tab -->
+            <div id="home-tab" class="admin-tab-content active">
+                <h3>Edit Halaman Home</h3>
+                <form id="homeForm">
+                    <div class="form-group">
+                        <label>Judul Hero</label>
+                        <input type="text" id="editHeroTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi Hero</label>
+                        <textarea id="editHeroDescription" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Update Home</button>
+                </form>
+            </div>
+
+            <!-- Portfolio & Blog tab taruh dari index.html -->
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/blog.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Luky Susanto</div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-section="home">Tentang Saya</a></li>
+                <li><a href="#" class="nav-link" data-section="portfolio">Portofolio</a></li>
+                <li><a href="#" class="nav-link" data-section="blog">Tulisan Saya</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <div id="guestButtons">
+                    <button class="admin-btn" onclick="showLogin()">Login Admin</button>
+                </div>
+                <div id="adminButtons" class="hidden">
+                    <span class="user-info">Admin</span>
+                    <button class="admin-btn" onclick="toggleAdmin()">Dashboard</button>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <div class="hero editable-content" id="heroSection">
+                <button class="edit-icon hidden" onclick="editHero()">✏</button>
+                <h1 id="heroTitle">Selamat Datang</h1>
+                <p id="heroDescription">Santri, pendidik, dan pegiat teknologi yang seneng ngulik kreatifitas digital. Mari berkenalan lebih jauh melalui karya-karya saya.</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div style="background: linear-gradient(45deg, #667eea, #764ba2); height: 200px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                        Project Preview
+                    </div>
+                    <div class="portfolio-item-content">
+                        <h3>Web Development</h3>
+                        <p>Mengembangkan aplikasi web modern dengan teknologi terkini</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div style="background: linear-gradient(45deg, #764ba2, #f093fb); height: 200px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                        Design Preview
+                    </div>
+                    <div class="portfolio-item-content">
+                        <h3>UI/UX Design</h3>
+                        <p>Merancang interface yang menarik dan user-friendly</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="content-section">
+            <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Portofolio Saya</h2>
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Portfolio items akan ditambahkan melalui JavaScript -->
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="content-section">
+            <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Tulisan Saya</h2>
+            <div id="blogContainer">
+                <!-- Blog posts akan ditambahkan melalui JavaScript -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Panel -->
+    <div class="login-panel" id="loginPanel">
+        <form class="login-form" id="loginForm">
+            <h2>Login Admin</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <button type="button" class="btn btn-secondary" onclick="hideLogin()">Batal</button>
+            <div id="loginError" style="color: red; margin-top: 1rem; display: none;"></div>
+        </form>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-content">
+            <div class="admin-header">
+                <h2>Dashboard Admin</h2>
+                <button class="close-btn" onclick="toggleAdmin()">&times;</button>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="home-tab">Edit Home</button>
+                <button class="admin-tab" data-tab="portfolio-tab">Kelola Portofolio</button>
+                <button class="admin-tab" data-tab="blog-tab">Kelola Blog</button>
+            </div>
+
+            <!-- Home Management -->
+            <div id="home-tab" class="admin-tab-content active">
+                <h3>Edit Halaman Home</h3>
+                <form id="homeForm">
+                    <div class="form-group">
+                        <label>Judul Hero</label>
+                        <input type="text" id="editHeroTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi Hero</label>
+                        <textarea id="editHeroDescription" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Update Home</button>
+                </form>
+            </div>
+
+            <!-- Portfolio Management -->
+            <div id="portfolio-tab" class="admin-tab-content">
+                <h3>Kelola Portofolio</h3>
+                <button class="btn" onclick="showPortfolioModal()">Tambah Portofolio Baru</button>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="portfolioTableBody">
+                        <!-- Data akan diisi melalui JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Blog Management -->
+            <div id="blog-tab" class="admin-tab-content">
+                <h3>Kelola Tulisan</h3>
+                <button class="btn" onclick="showBlogModal()">Tambah Tulisan Baru</button>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Judul</th>
+                            <th>Preview</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blogTableBody">
+                        <!-- Data akan diisi melalui JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal -->
+    <div class="modal" id="portfolioModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="portfolioModalTitle">Tambah Portofolio</h3>
+                <button class="close-btn" onclick="hidePortfolioModal()">&times;</button>
+            </div>
+            <form id="portfolioForm">
+                <input type="hidden" id="portfolioId">
+                <div class="form-group">
+                    <label>Judul Project</label>
+                    <input type="text" id="portfolioTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea id="portfolioDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>URL Gambar</label>
+                    <input type="url" id="portfolioImage">
+                </div>
+                <div class="form-group">
+                    <label>Link Project</label>
+                    <input type="url" id="portfolioLink">
+                </div>
+                <button type="submit" class="btn" id="portfolioSubmitBtn">Tambah Portofolio</button>
+                <button type="button" class="btn btn-secondary" onclick="hidePortfolioModal()">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Blog Modal -->
+    <div class="modal" id="blogModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="blogModalTitle">Tambah Tulisan</h3>
+                <button class="close-btn" onclick="hideBlogModal()">&times;</button>
+            </div>
+            <form id="blogForm">
+                <input type="hidden" id="blogId">
+                <div class="form-group">
+                    <label>Judul Tulisan</label>
+                    <input type="text" id="blogTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Konten</label>
+                    <textarea id="blogContent" rows="8" required></textarea>
+                </div>
+                <button type="submit" class="btn" id="blogSubmitBtn">Tambah Tulisan</button>
+                <button type="button" class="btn btn-secondary" onclick="hideBlogModal()">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/blog.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
